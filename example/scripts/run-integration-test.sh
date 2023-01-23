@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 chromeDriverPort=4444
 clientPort=9191
 
@@ -7,21 +7,24 @@ killProcessInPort() {
 }
 
 startChromeDriver() {
-	killProcessInPort $chromeDriverPort && cd driver_test &&
-		./chromedriver --port=$chromeDriverPort && cd ..
+	cd driver_test && ./chromedriver --port=$chromeDriverPort && cd ..
 }
 
 startFlutterIntegrationTest() {
-	killProcessInPort $clientPort &&
-		flutter drive \
-			--driver=driver_test/integration_test.dart \
-			--target=integration_test/dart_web_plugin_base_test.dart \
-			-d web-server --web-port $clientPort --headless --release --keep-app-running
+	flutter drive \
+		--driver=driver_test/integration_test.dart \
+		--target=integration_test/dart_web_plugin_base_test.dart \
+		-d web-server --web-port $clientPort --headless --release --keep-app-running
 
 	# web-server chrome
 }
 
 main() {
+	if [[ -z "$CI" ]]; then
+		killProcessInPort $chromeDriverPort &&
+			killProcessInPort $clientPort
+	fi
+
 	startChromeDriver &
 	startFlutterIntegrationTest
 }
