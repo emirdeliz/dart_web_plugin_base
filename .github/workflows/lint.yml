@@ -4,7 +4,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     container:
-      image: emirdeliz/flutter@latest
+      image: emirdeliz/flutter:latest
     steps:
       - uses: actions/checkout@v3
         with:
