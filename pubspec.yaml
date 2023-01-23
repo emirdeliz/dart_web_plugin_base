@@ -1,0 +1,28 @@
+name: dart_web_plugin_base
+description: Dart web plugin base - Make calls from flutter to js.
+version: 0.0.1
+
+environment:
+  sdk: '>=2.18.5 <3.0.0'
+  flutter: '>=2.5.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  plugin_platform_interface: ^2.0.2
+  universal_html: ^2.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  test: ^1.21.4
+
+flutter:
+  plugin:
+    platforms:
+      web:
+        pluginClass: DartWebPluginBaseWeb
+        fileName: dart_web_plugin_base_web.dart

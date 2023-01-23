@@ -1,0 +1,16 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Dart web plugin base - Make calls from flutter to js",
+			"request": "launch",
+			"type": "dart",
+			"cwd": "example",
+			"args": ["--web-port=9191", "--web-hostname=0.0.0.0"],
+			"program": "lib/main.dart"
+		}
+	]
+}

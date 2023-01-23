@@ -1,0 +1,25 @@
+name: dart_web_plugin_base_example
+description: Demonstrates how to use the dart_web_plugin_base plugin.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+environment:
+  sdk: '>=2.18.5 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dart_web_plugin_base:
+    path: ../
+  universal_html: ^2.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/dart-web-plugin-base.js
