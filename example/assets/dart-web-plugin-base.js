@@ -3,6 +3,12 @@ const Methods = {
 	uploadPdf: 'uploadPdf',
 };
 
+/**
+ * This method is used to send data from dart side to Js.
+ * @param - args.methodTarget(required): The method will be called on the js side.
+ * @param - args.arguments(optional): The generic object with the data to get on the js side.
+ * @param - args.file(optional): The file like txt or pdf to get on the js side.
+ */
 window.jsInvokeMethod = async (args) => {
 	const methodTarget = args.methodTarget;
 	const result = {
@@ -26,3 +32,15 @@ window.jsInvokeMethod = async (args) => {
 	}
 	return result;
 };
+
+// /**
+//  * This method is used to send data from js side to dart.
+//  * @param - args.methodTarget(required): The method will be called on the dart side.
+//  * @param - args.arguments(optional): The generic object with the data to get on the dart side.
+//  * @param - args.file(optional): The file like txt or pdf to get on the dart side.
+//  */
+// window.jsSendMessageToDart({
+// 	methodTarget: 'uploadContract',
+// 	arguments: { id: 13211 },
+// 	file: File([], 'contract.pdf', { type: 'application/pdf' }),
+// });

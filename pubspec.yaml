@@ -1,5 +1,5 @@
 name: dart_web_plugin_base
-description: Dart web plugin base - Make calls from flutter to js.
+description: Dart web plugin base - Make calls from dart to js and vice-versa.
 version: 0.0.1
 
 environment:
