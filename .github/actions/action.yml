@@ -8,5 +8,5 @@ runs:
     - run: cd example/driver_test && rm -rf chromedriver
       shell: sh
     - uses: nanasess/setup-chromedriver@v1
-    - run: cd ../../
+    - run: pwd && ls && cd ../../
       shell: sh
