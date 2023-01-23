@@ -4,5 +4,6 @@ jobs:
   lint:
     runs-on: macos-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/actions
       - run: flutter analyze
