@@ -8,7 +8,7 @@ The plugin uses a simple approach by setting a simple Js on the assets.
 
 1- Sent data from dart to js.
 
-```
+```javascript
 /**
  * This method is used to send data from dart side to Js.
  * @param - args.methodTarget(required): The method will be called on the js side.
@@ -33,9 +33,9 @@ window.jsInvokeMethod = async (args) => {
 };
 ```
 
-2- Sent data from js to flutter.
+2- Sent data from js to dart.
 
-```
+```javascript
 /**
  * This method is used to send data from js side to dart.
  * @param - args.methodTarget(required): The method will be called on the dart side.
