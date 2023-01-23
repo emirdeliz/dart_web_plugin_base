@@ -1,4 +1,6 @@
 runs:
   using: 'composite'
   steps:
-    - uses: emirdeliz/flutter
+    - uses: emirdeliz/flutter@latest
+    - run: flutter clean && flutter pub get
+      shell: sh
