@@ -20,7 +20,7 @@ startFlutterIntegrationTest() {
 }
 
 main() {
-	if [[ -z "$CI" ]]; then
+	if [[ -z "$RUNNER_OS" ]]; then
 		killProcessInPort $chromeDriverPort &&
 			killProcessInPort $clientPort
 	fi
