@@ -6,3 +6,6 @@ runs:
         channel: 'stable'
     - run: flutter clean && flutter pub get
       shell: sh
+    - run: cd example/driver_test && rm -rf chromedriver
+      shell: sh
+    - uses: nanasess/setup-chromedriver@v1
