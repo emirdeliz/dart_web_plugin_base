@@ -16,20 +16,20 @@ The plugin uses a simple approach by setting a simple Js on the assets.
  * @param - args.file(optional): The file like txt or pdf to get on the js side.
  */
 window.jsInvokeMethod = async (args) => {
-	let result;
-	const methodTarget = args.methodTarget;
+  let result;
+  const methodTarget = args.methodTarget;
 
-	switch (methodTarget) {
-		case 'getClient': {
-			// result = <getClient implementation>
-			break;
-		}
-		case 'getProduct': {
-			// result = <getProduct implementation>
-			break;
-		}
-	}
-	return result;
+  switch (methodTarget) {
+    case 'getClient': {
+    // result = <getClient implementation>
+      break;
+    }
+    case 'getProduct': {
+      // result = <getProduct implementation>
+      break;
+    }
+  }
+  return result;
 };
 ```
 
@@ -43,9 +43,9 @@ window.jsInvokeMethod = async (args) => {
  * @param - args.file(optional): The file like txt or pdf to get on the dart side.
  */
 window.jsSendMessageToDart({
-	methodTarget: 'uploadContract',
-	arguments: { id: 13211 },
-	file: File([], 'contract.pdf', { type: 'application/pdf' }),
+  methodTarget: 'uploadContract',
+  arguments: { id: 13211 },
+  file: File([], 'contract.pdf', { type: 'application/pdf' }),
 });
 ```
 
