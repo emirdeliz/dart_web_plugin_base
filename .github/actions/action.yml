@@ -4,8 +4,9 @@ runs:
     - uses: subosito/flutter-action@v2
       with:
         channel: 'stable'
-    - run: flutter clean && flutter pub get
-      shell: sh
+    - uses: actions/checkout@v3
     - run: cd example/driver_test && rm -rf chromedriver
       shell: sh
     - uses: nanasess/setup-chromedriver@v1
+    - run: cd ../../
+      shell: sh
