@@ -1,5 +1,8 @@
 runs:
   using: 'composite'
   steps:
+    - uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
     - run: flutter clean && flutter pub get
       shell: sh
