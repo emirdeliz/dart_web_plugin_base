@@ -9,6 +9,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions
-        with:
-          download-path: example/driver_test
       - run: cd example && sh scripts/run-integration-test.sh

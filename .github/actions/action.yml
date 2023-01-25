@@ -13,8 +13,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - run: echo Hello ${{ description }}.
-      shell: sh
     - name: emirdeliz-chromedriver
       uses: emirdeliz/emirdeliz-chromedriver@v0.0.1
       with:
