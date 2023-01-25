@@ -1,11 +1,21 @@
+name: 'Chromedriver download'
+description: 'Download the chromedriver'
+inputs:
+  version:
+    description: 'The chromedriver version'
+    default: 'latest'
+  arch:
+    description: 'The chromedriver arch (linux64, mac64, mac_arm64 or wind32)'
+    default: 'linux64'
+  download-path:
+    description: 'The path to download chromedriver'
+    default: ''
 runs:
   using: 'composite'
   steps:
-    - uses: subosito/flutter-action@v2
+    - run: echo Hello ${{ description }}.
+      shell: sh
+    - name: emirdeliz-chromedriver
+      uses: emirdeliz/emirdeliz-chromedriver@v0.0.1
       with:
-        channel: 'stable'
-    - run: cd example/driver_test && rm -rf chromedriver && pwd && ls
-      shell: sh
-    - uses: nanasess/setup-chromedriver@v1
-    - run: pwd && ls && cd ../../
-      shell: sh
+        download-path: example/driver_test

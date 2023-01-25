@@ -7,9 +7,7 @@ killProcessInPort() {
 }
 
 startChromeDriver() {
-	echo "-- antes" && pwd && ls && cd driver_test &&
-		echo "-- depois" && pwd && ls &&
-		./chromedriver --port=$chromeDriverPort && cd ..
+	cd driver_test && ./chromedriver --port=$chromeDriverPort && cd ..
 }
 
 startFlutterIntegrationTest() {

@@ -2,8 +2,13 @@ name: Test
 on: [push]
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: ubuntu-22.04
+    container:
+      image: fischerscode/flutter
+      options: --user root
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions
+        with:
+          download-path: example/driver_test
       - run: cd example && sh scripts/run-integration-test.sh
