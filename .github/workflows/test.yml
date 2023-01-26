@@ -7,8 +7,8 @@ jobs:
       image: fischerscode/flutter
       options: "--user root"
     steps:
-      - uses: actions/checkout@v4
-      - uses: emirdeliz/emirdeliz-chromedriver@v0.0.3
+      - uses: actions/checkout@v3
+      - uses: emirdeliz/emirdeliz-chromedriver@v0.0.4
         with:
           download-path: example/driver_test
       - run: cd example && sh scripts/run-integration-test.sh
