@@ -1,5 +1,8 @@
 # dart_web_plugin_base
 
+[![Test](https://github.com/emirdeliz/dart_web_plugin_base/actions/workflows/test.yml/badge.svg)](https://github.com/emirdeliz/dart_web_plugin_base/actions/workflows/test.yml)
+[![Lint](https://github.com/emirdeliz/dart_web_plugin_base/actions/workflows/lint.yml/badge.svg)](https://github.com/emirdeliz/dart_web_plugin_base/actions/workflows/lint.yml)
+
 This plugin makes your development easy when you call functions between dart and js.
 
 ### How does it works?
