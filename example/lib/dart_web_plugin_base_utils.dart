@@ -19,9 +19,9 @@ enum BarcodeJsEvents { getBarcode, getDate, uploadPdf }
 
 const String barcodeResult = '858600000012212203852130540716213509968398132948';
 
-Future<DartWebPluginBaseChannelMessageArguments> sentDataToJs(
-  DartWebPluginBase dartWebPluginBasePlugin,
-  DartWebPluginBaseChannelMessageArguments args,
+Future<DartWebPluginBaseChannelMessageArguments<String, R>> sentDataToJs<R>(
+  DartWebPluginBase<String, String, R> dartWebPluginBasePlugin,
+  DartWebPluginBaseChannelMessageArguments<String, R> args,
 ) async {
   final data = await dartWebPluginBasePlugin.invokeMethodJs(
     MethodCall(

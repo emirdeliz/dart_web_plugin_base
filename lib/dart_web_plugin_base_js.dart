@@ -15,31 +15,41 @@ external Future<dynamic> jsInvokeMethod(
 
 @JS('DartWebPluginBaseChannelMessageArguments')
 @anonymous
-class DartWebPluginBaseChannelMessageArguments {
+class DartWebPluginBaseChannelMessageArguments<M, A> {
   @JS('methodTarget')
-  external String methodTarget;
+  external M methodTarget;
 
   @JS('arguments')
-  external dynamic arguments;
+  external A arguments;
 
   @JS('file')
   external File? file;
 }
 
-class DartWebPluginBaseJs<K, V> {
-  late void Function<K, V>(DartWebPluginBaseChannelMessageArguments)
+class DartWebPluginBaseJs<M, R> {
+  late void Function(DartWebPluginBaseChannelMessageArguments<M, R>)?
       _onMessageFromJs;
 
-  void initialize(onMessageFromJs) {
+  void initialize(
+    void Function(DartWebPluginBaseChannelMessageArguments<M, R>)?
+        onMessageFromJs,
+  ) {
     _onMessageFromJs = onMessageFromJs;
     _jsSendMessageToDart = allowInterop((
       DartWebPluginBaseChannelMessageArguments arguments,
     ) {
-      _handleJsCall(arguments);
+      final args = DartWebPluginBaseChannelMessageArguments<M, R>();
+      args.methodTarget = arguments.methodTarget;
+      args.arguments = arguments.arguments;
+      args.file = arguments.file;
+
+      _handleJsCall(args);
     });
   }
 
-  void _handleJsCall(DartWebPluginBaseChannelMessageArguments arguments) {
-    _onMessageFromJs(arguments);
+  void _handleJsCall(DartWebPluginBaseChannelMessageArguments<M, R> arguments) {
+    if (_onMessageFromJs != null) {
+      _onMessageFromJs!(arguments);
+    }
   }
 }

@@ -4,15 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:universal_html/js_util.dart';
 import 'dart_web_plugin_base_platform_interface.dart';
 
-class DartWebPluginBaseMethodChannel<K, V>
-    extends DartWebPluginBasePlatform<K, V> {
-  final void Function<K, V>(DartWebPluginBaseChannelMessageArguments)
-      onMessageFromJs;
-
-  DartWebPluginBaseMethodChannel(this.onMessageFromJs);
-
+class DartWebPluginBaseMethodChannel<M, A, R>
+    extends DartWebPluginBasePlatform<M, A, R> {
   @override
-  Future<DartWebPluginBaseChannelMessageArguments> invokeMethodJs(
+  Future<DartWebPluginBaseChannelMessageArguments<M, R>> invokeMethodJs(
     MethodCall call,
   ) async {
     final method = DartWebPluginBaseChannelMessage.values.firstWhere(
@@ -23,9 +18,9 @@ class DartWebPluginBaseMethodChannel<K, V>
     switch (method) {
       case DartWebPluginBaseChannelMessage.sendMethodMessageToClient:
         {
-          final arguments = DartWebPluginBaseChannelMessageArguments();
+          final arguments = DartWebPluginBaseChannelMessageArguments<M, A>();
           arguments.methodTarget = call.arguments.methodTarget;
-          arguments.arguments = call.arguments.arguments;
+          arguments.arguments = call.arguments.arguments ?? '';
           arguments.file = call.arguments.file;
           return await onMessageFromDart(arguments);
         }
@@ -38,19 +33,16 @@ class DartWebPluginBaseMethodChannel<K, V>
     }
   }
 
-  Future<DartWebPluginBaseChannelMessageArguments> onMessageFromDart(
-    DartWebPluginBaseChannelMessageArguments arguments,
+  Future<DartWebPluginBaseChannelMessageArguments<M, R>> onMessageFromDart(
+    DartWebPluginBaseChannelMessageArguments<M, A> arguments,
   ) async {
-    final response = await promiseToFuture(
-      await jsInvokeMethod(
+    final response =
+        await promiseToFuture<DartWebPluginBaseChannelMessageArguments<M, R>>(
+      jsInvokeMethod(
         arguments,
       ),
     );
 
-    final result = DartWebPluginBaseChannelMessageArguments();
-    result.methodTarget = response.methodTarget;
-    result.arguments = response.arguments;
-    result.file = response.file;
-    return result;
+    return response;
   }
 }

@@ -5,25 +5,24 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'dart_web_plugin_base_platform_interface.dart';
 
 /// A web implementation of the DartWebPluginBasePlatform of the DartWebPluginBase plugin.
-class DartWebPluginBaseWeb<K, V> extends DartWebPluginBasePlatform<K, V> {
-  final void Function<K, V>(DartWebPluginBaseChannelMessageArguments)
+class DartWebPluginBaseWeb<M, A, R> extends DartWebPluginBasePlatform<M, A, R> {
+  final void Function(DartWebPluginBaseChannelMessageArguments<M, R>)?
       onMessageFromJs;
 
   DartWebPluginBaseWeb(this.onMessageFromJs) {
-    DartWebPluginBasePlatform.instance = DartWebPluginBaseMethodChannel<K, V>(
-      onMessageFromJs,
-    );
+    DartWebPluginBasePlatform.instance =
+        DartWebPluginBaseMethodChannel<M, A, R>();
   }
 
   static void registerWith(Registrar registrar) {}
 
   @override
-  Future<DartWebPluginBaseChannelMessageArguments> invokeMethodJs(
+  Future<DartWebPluginBaseChannelMessageArguments<M, R>> invokeMethodJs(
     MethodCall call,
   ) async {
     final result = await DartWebPluginBasePlatform.instance.invokeMethodJs(
       call,
     );
-    return result;
+    return result as DartWebPluginBaseChannelMessageArguments<M, R>;
   }
 }

@@ -14,9 +14,7 @@ startFlutterIntegrationTest() {
 	flutter drive \
 		--driver=driver_test/integration_test.dart \
 		--target=integration_test/dart_web_plugin_base_test.dart \
-		-d web-server --web-port $clientPort --headless --release --keep-app-running
-
-	# web-server chrome
+		-d web-server --web-port $clientPort --headless --keep-app-running
 }
 
 main() {

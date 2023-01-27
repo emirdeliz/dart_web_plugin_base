@@ -2,7 +2,7 @@ import 'package:dart_web_plugin_base/dart_web_plugin_base_js.dart';
 import 'package:flutter/services.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-abstract class DartWebPluginBasePlatform<K, V> extends PlatformInterface {
+abstract class DartWebPluginBasePlatform<M, A, R> extends PlatformInterface {
   /// Constructs a DartWebPluginBasePlatform.
   DartWebPluginBasePlatform() : super(token: _token);
 
@@ -25,10 +25,11 @@ abstract class DartWebPluginBasePlatform<K, V> extends PlatformInterface {
     return _instance!;
   }
 
-  Future<DartWebPluginBaseChannelMessageArguments> invokeMethodJs(
+  Future<DartWebPluginBaseChannelMessageArguments<M, R>> invokeMethodJs(
     MethodCall call,
   ) async {
-    return instance.invokeMethodJs(call);
+    return instance.invokeMethodJs(call)
+        as DartWebPluginBaseChannelMessageArguments<M, R>;
   }
 
   Future<int> getPlatformVersion() {

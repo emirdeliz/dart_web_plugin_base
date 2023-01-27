@@ -30,17 +30,22 @@ window.jsInvokeMethod = async (args) => {
 			break;
 		}
 	}
-	return result;
+
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(result);
+		}, 1000);
+	})
 };
 
-// /**
-//  * This method is used to send data from js side to dart.
-//  * @param - args.methodTarget(required): The method will be called on the dart side.
-//  * @param - args.arguments(optional): The generic object with the data to get on the dart side.
-//  * @param - args.file(optional): The file like txt or pdf to get on the dart side.
-//  */
+/**
+ * This method is used to send data from js side to dart.
+ * @param - args.methodTarget(required): The method will be called on the dart side.
+ * @param - args.arguments(optional): The generic object with the data to get on the dart side.
+ * @param - args.file(optional): The file like txt or pdf to get on the dart side.
+ */
 // window.jsSendMessageToDart({
 // 	methodTarget: 'uploadContract',
 // 	arguments: { id: 13211 },
-// 	file: File([], 'contract.pdf', { type: 'application/pdf' }),
+// 	file: new File([], 'contract.pdf', { type: 'application/pdf' }),
 // });

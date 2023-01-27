@@ -3,8 +3,8 @@ import 'package:dart_web_plugin_base/dart_web_plugin_base_js.dart';
 import 'package:dart_web_plugin_base_example/dart_web_plugin_base_utils.dart';
 import 'package:flutter/material.dart';
 
-class DartWebPluginBaseAppHomePage extends StatefulWidget {
-  final DartWebPluginBase? dartWebPluginBasePlugin;
+class DartWebPluginBaseAppHomePage<R> extends StatefulWidget {
+  final DartWebPluginBase<String, String, R>? dartWebPluginBasePlugin;
 
   const DartWebPluginBaseAppHomePage({
     Key? key,
@@ -14,37 +14,30 @@ class DartWebPluginBaseAppHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<DartWebPluginBaseAppHomePage> createState() =>
-      _DartWebPluginBaseAppHomePageState();
+  State<DartWebPluginBaseAppHomePage<R>> createState() =>
+      _DartWebPluginBaseAppHomePageState<R>();
 }
 
-class _DartWebPluginBaseAppHomePageState
-    extends State<DartWebPluginBaseAppHomePage> {
+class _DartWebPluginBaseAppHomePageState<R>
+    extends State<DartWebPluginBaseAppHomePage<R>> {
   String dartToJsResult = '';
-  String jsToDartResult = '';
-  late DartWebPluginBase _dartWebPluginBasePlugin;
+  late DartWebPluginBase<String, String, R> _dartWebPluginBasePlugin;
 
   @override
   void initState() {
     super.initState();
-    _dartWebPluginBasePlugin =
-        widget.dartWebPluginBasePlugin ?? DartWebPluginBase(onMessageFromJs);
-  }
-
-  void onMessageFromJs<K, V>(DartWebPluginBaseChannelMessageArguments result) {
-    setState(() {
-      jsToDartResult = result.arguments;
-    });
+    _dartWebPluginBasePlugin = widget.dartWebPluginBasePlugin ??
+        DartWebPluginBase<String, String, R>(null);
   }
 
   void _callJs() async {
-    final args = DartWebPluginBaseChannelMessageArguments();
+    final args = DartWebPluginBaseChannelMessageArguments<String, String>();
     args.arguments = '';
     args.methodTarget = BarcodeJsEvents.getBarcode.name;
 
     final data = await sentDataToJs(_dartWebPluginBasePlugin, args);
     setState(() {
-      dartToJsResult = data.arguments;
+      dartToJsResult = data.arguments.toString();
     });
   }
 
@@ -68,7 +61,13 @@ class _DartWebPluginBaseAppHomePageState
               style: TextStyle(fontSize: 15, color: Colors.white),
             ),
           ),
-          Text(jsToDartResult)
+          Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: Text(
+              dartToJsResult,
+              style: const TextStyle(fontSize: 15, color: Colors.white),
+            ),
+          )
         ],
       ),
     );
