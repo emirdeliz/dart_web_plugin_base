@@ -1,4 +1,4 @@
-import 'package:dart_web_plugin_base/dart_web_plugin_base_js.dart';
+import 'package:dart_web_plugin_base/dart_web_plugin_base_web.dart';
 import 'package:flutter/services.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 

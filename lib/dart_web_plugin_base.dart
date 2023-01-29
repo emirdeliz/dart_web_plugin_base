@@ -1,7 +1,6 @@
-import 'package:dart_web_plugin_base/dart_web_plugin_base_js.dart';
 import 'package:dart_web_plugin_base/dart_web_plugin_base_web.dart';
+import 'package:dart_web_plugin_base/dart_web_plugin_base_plugin.dart';
 import 'package:flutter/services.dart';
-
 import 'dart_web_plugin_base_platform_interface.dart';
 
 class DartWebPluginBase<M, A, R> extends DartWebPluginBasePlatform<M, A, R> {
@@ -17,7 +16,7 @@ class DartWebPluginBase<M, A, R> extends DartWebPluginBasePlatform<M, A, R> {
   Future<DartWebPluginBaseChannelMessageArguments<M, R>> invokeMethodJs(
     MethodCall call,
   ) async {
-    final pluginBaseWeb = DartWebPluginBaseWeb<M, A, R>(
+    final pluginBaseWeb = DartWebPluginBasePlugin<M, A, R>(
       onMessageFromJs,
     );
     final result = await pluginBaseWeb.invokeMethodJs(call);

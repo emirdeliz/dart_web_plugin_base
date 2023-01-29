@@ -25,5 +25,5 @@ flutter:
   plugin:
     platforms:
       web:
-        pluginClass: DartWebPluginBaseWeb
-        fileName: dart_web_plugin_base_web.dart
+        pluginClass: DartWebPluginBasePlugin
+        fileName: dart_web_plugin_base_plugin.dart

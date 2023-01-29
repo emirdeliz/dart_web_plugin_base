@@ -1,11 +1,11 @@
 import 'dart:async';
 
+import 'package:dart_web_plugin_base/dart_web_plugin_base_web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:universal_html/html.dart';
 import 'package:universal_html/js.dart' as js;
-import 'package:dart_web_plugin_base/dart_web_plugin_base_js.dart';
 import 'package:dart_web_plugin_base_example/dart_web_plugin_base_app.dart';
 import 'package:dart_web_plugin_base/dart_web_plugin_base.dart';
 import 'package:dart_web_plugin_base_example/dart_web_plugin_base_utils.dart';

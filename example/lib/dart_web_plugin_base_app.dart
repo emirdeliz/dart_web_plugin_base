@@ -1,5 +1,5 @@
 import 'package:dart_web_plugin_base/dart_web_plugin_base.dart';
-import 'package:dart_web_plugin_base/dart_web_plugin_base_js.dart';
+import 'package:dart_web_plugin_base/dart_web_plugin_base_web.dart';
 import 'package:dart_web_plugin_base_example/dart_web_plugin_base_utils.dart';
 import 'package:flutter/material.dart';
 

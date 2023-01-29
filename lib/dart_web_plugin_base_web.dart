@@ -1,28 +1,55 @@
-import 'package:dart_web_plugin_base/dart_web_plugin_base_js.dart';
-import 'package:dart_web_plugin_base/dart_web_plugin_base_method_channel.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-import 'dart_web_plugin_base_platform_interface.dart';
+// ignore: depend_on_referenced_packages
+import 'package:js/js.dart';
+import 'package:universal_html/html.dart';
 
-/// A web implementation of the DartWebPluginBasePlatform of the DartWebPluginBase plugin.
-class DartWebPluginBaseWeb<M, A, R> extends DartWebPluginBasePlatform<M, A, R> {
-  final void Function(DartWebPluginBaseChannelMessageArguments<M, R>)?
-      onMessageFromJs;
+@JS('jsSendMessageToDart')
+external set _jsSendMessageToDart(
+  void Function(DartWebPluginBaseChannelMessageArguments arguments)
+      onMessageFromJs,
+);
 
-  DartWebPluginBaseWeb(this.onMessageFromJs) {
-    DartWebPluginBasePlatform.instance =
-        DartWebPluginBaseMethodChannel<M, A, R>();
+@JS('jsInvokeMethod')
+external Future<dynamic> jsInvokeMethod(
+  DartWebPluginBaseChannelMessageArguments arguments,
+);
+
+@JS('DartWebPluginBaseChannelMessageArguments')
+@anonymous
+class DartWebPluginBaseChannelMessageArguments<M, A> {
+  @JS('methodTarget')
+  external M methodTarget;
+
+  @JS('arguments')
+  external A arguments;
+
+  @JS('file')
+  external File? file;
+}
+
+class DartWebPluginBaseJs<M, R> {
+  late void Function(DartWebPluginBaseChannelMessageArguments<M, R>)?
+      _onMessageFromJs;
+
+  void initialize(
+    void Function(DartWebPluginBaseChannelMessageArguments<M, R>)?
+        onMessageFromJs,
+  ) {
+    _onMessageFromJs = onMessageFromJs;
+    _jsSendMessageToDart = allowInterop((
+      DartWebPluginBaseChannelMessageArguments arguments,
+    ) {
+      final args = DartWebPluginBaseChannelMessageArguments<M, R>();
+      args.methodTarget = arguments.methodTarget;
+      args.arguments = arguments.arguments;
+      args.file = arguments.file;
+
+      _handleJsCall(args);
+    });
   }
 
-  static void registerWith(Registrar registrar) {}
-
-  @override
-  Future<DartWebPluginBaseChannelMessageArguments<M, R>> invokeMethodJs(
-    MethodCall call,
-  ) async {
-    final result = await DartWebPluginBasePlatform.instance.invokeMethodJs(
-      call,
-    );
-    return result as DartWebPluginBaseChannelMessageArguments<M, R>;
+  void _handleJsCall(DartWebPluginBaseChannelMessageArguments<M, R> arguments) {
+    if (_onMessageFromJs != null) {
+      _onMessageFromJs!(arguments);
+    }
   }
 }
