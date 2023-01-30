@@ -1,6 +1,6 @@
 name: dart_web_plugin_base
 description: Dart web plugin base - Make calls from dart to js and vice-versa.
-version: 0.0.1
+version: 0.0.2
 
 environment:
   sdk: '>=2.18.5 <3.0.0'
